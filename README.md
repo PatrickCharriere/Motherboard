@@ -1,2 +1,2 @@
 # Motherboard
-contains the brains of our robot !
+contains the brain of our robot !
