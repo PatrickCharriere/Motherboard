@@ -1,0 +1,10 @@
+
+TODO
+
+Shape.cpp : 
+	- Normaliser l'angle du rectangle (entre 0 et 360 pour l'instant sur mesh.cpp)
+	
+Mesh.cpp :
+	- Bibliothèques mathématiques sur Beagle ?
+	- Que faire si la mesh dépasse de la map en négatif (x, y) ?
+
