@@ -17,18 +17,11 @@ int main(int argc, char* argv[]) {
 	//circleMesh->TerminalPrintMesh();
 
 	for(int i=0; i<=360; i+=1) {
-		system("clear");
 		mainRobotShape->SetAngle(i);
 		rectangleMesh->GenerateFromShape(mainRobotShape);
 		rectangleMesh->TerminalPrintMesh();
 		usleep(10000);
+		system("clear");
 	}
-	/*rectangleMesh->TerminalPrintMesh();*/
-	/*system("clear");
-	cout<<"height: "<<rectangleMesh->GetHeight()<<endl;
-	cout<<"width: "<<rectangleMesh->GetWidth()<<endl;
-	cout<<"offsetX: "<<rectangleMesh->GetOffset().x<<endl;
-	cout<<"offsetY: "<<rectangleMesh->GetOffset().y<<endl;
-	*/
 	return 0;
 }
