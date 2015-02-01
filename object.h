@@ -5,6 +5,8 @@
 
 typedef enum object {
 
+	map,
+
 	item_carpet,
 	item_spot,
 	item_popcorn,

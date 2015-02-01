@@ -16,12 +16,12 @@ int main(int argc, char* argv[]) {
 
 	//circleMesh->TerminalPrintMesh();
 
-	for(int i=0; i<=360; i+=1) {
+	/*for(int i=0; i<=360; i+=1) {
 		mainRobotShape->SetAngle(i);
 		rectangleMesh->GenerateFromShape(mainRobotShape);
 		rectangleMesh->TerminalPrintMesh();
 		usleep(10000);
 		system("clear");
-	}
+	}*/
 	return 0;
 }
