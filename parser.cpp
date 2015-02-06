@@ -1,24 +1,19 @@
 #include "parser.h"
 
-vector<string> Parser::parseFile(string filename, char delimiter) {
+void Parser::parseFile(string filename, char delimiter, vector<string>* row) {
 	ifstream in(filename);
 	if (in.fail()) throw 20;
 
-	vector<string> row;
 	while(in.good()) {
-		row = csv_read_row(in, delimiter);
+		csv_read_row(in, delimiter, row);
 	}
 	in.close();
-
-	return row;
 }
 
 
-vector<string> Parser::csv_read_row(istream &in, char delimiter)
-{
+void Parser::csv_read_row(istream &in, char delimiter, vector<string>* row) {
     stringstream ss;
     bool inquotes = false;
-    vector<string> row;//relying on RVO
     while(in.good())
     {
         char c = in.get();
@@ -39,14 +34,14 @@ vector<string> Parser::csv_read_row(istream &in, char delimiter)
         }
         else if (!inquotes && c==delimiter) //end of field
         {
-            row.push_back( ss.str() );
+            row->push_back( ss.str() );
             ss.str("");
         }
         else if (!inquotes && (c=='\r' || c=='\n') )
         {
             if(in.peek()=='\n') { in.get(); }
-            row.push_back( ss.str() );
-            return row;
+            row->push_back( ss.str() );
+            return;
         }
         else
         {

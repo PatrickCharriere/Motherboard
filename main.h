@@ -16,6 +16,8 @@
 #include "parser.h"
 #include <iostream>
 #include <cstdlib>
+#include <string>
+#include <vector>
 #include <unistd.h>
 using namespace std;
 

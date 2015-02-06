@@ -8,12 +8,13 @@
 #include <vector>
 #include <sstream>
 #include <istream>
+#include <stdlib.h>
 using namespace std;
 
 class Parser {
 public:
-	vector<string> parseFile(string filename, char delimiter);
-	vector<string> csv_read_row(istream &in, char delimiter);
+	void parseFile(string filename, char delimiter, vector<string>* row);
+	void csv_read_row(istream &in, char delimiter, vector<string>* row);
 
 };
 
