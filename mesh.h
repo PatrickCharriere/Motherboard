@@ -12,9 +12,9 @@ using namespace std;
 class Mesh 
 {
 public:
-	Mesh(Shape *shape);
+	Mesh(Shape *shape, int value);
 
-	void GenerateFromShape(Shape *shape);
+	void GenerateFromShape(Shape *shape, int value);
 	void Merge(Mesh* mesh);
 
 	int IsPointInRect(point_t *pt, point_t *A, point_t *B, point_t *C, point_t *D, point_t *E, point_t *F, point_t *G, point_t *H, float angleDeg);

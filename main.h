@@ -8,12 +8,16 @@
 #ifndef MAIN_H_
 #define MAIN_H_
 
+//#include "fileNotFoundException.h"
 #include "object.h"
 #include "point.h"
 #include "mesh.h"
 #include "shape.h"
+#include "parser.h"
 #include <iostream>
 #include <cstdlib>
+#include <string>
+#include <vector>
 #include <unistd.h>
 using namespace std;
 

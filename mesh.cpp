@@ -1,12 +1,12 @@
 #include "mesh.h"
 
-Mesh::Mesh(Shape* shape) {
+Mesh::Mesh(Shape* shape, int value) {
 
-	this->GenerateFromShape(shape);
+	this->GenerateFromShape(shape, value);
 
 }
 
-void Mesh::GenerateFromShape(Shape *shape) {
+void Mesh::GenerateFromShape(Shape *shape, int value) {
 	this->m_shape = shape;
 	int centreX = shape->GetCenter().x;
 	int centreY = shape->GetCenter().y;
@@ -42,9 +42,9 @@ void Mesh::GenerateFromShape(Shape *shape) {
 		for(int y=E->y; y<=G->y; y++) {
 			for(int x=E->x; x<=G->x; x++) {
 				if(sqrt((E->y+radius-y)*(E->y+radius-y)+(E->x+radius-x)*(E->x+radius-x))<=radius) {
-					this->m_data[(x-E->x)+((y*this->m_width)-E->y)] = 1;
+					this->m_data[(x-E->x)+((y*this->m_width)-E->y)] = value;
 				} else {
-					this->m_data[(x-E->x)+((y*this->m_width)-E->y)] = 0;
+					this->m_data[(x-E->x)+((y*this->m_width)-E->y)] = value;
 				}
 			}
 		}
@@ -137,7 +137,9 @@ void Mesh::GenerateFromShape(Shape *shape) {
 		for(int y=E->y; y<=G->y; y++) {
 			for(int x=E->x; x<=G->x; x++) {
 				pt->x=x; pt->y=y;
-				this->m_data[(x-E->x)+((y*this->m_width)-E->y)] = IsPointInRect(pt,A,B,C,D,E,F,G,H,angleDeg);
+				if(IsPointInRect(pt,A,B,C,D,E,F,G,H,angleDeg)) {
+					this->m_data[(x-E->x)+((y*this->m_width)-E->y)] = value;
+				}
 			}
 		}
 	}

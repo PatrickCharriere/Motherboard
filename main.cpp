@@ -1,27 +1,34 @@
 #include "main.h"
 
+
+
 int main(int argc, char* argv[]) {
-	point_t centre;
-	centre.x = 5;
-	centre.y = 5;
 
-	object_t robot = robot_main;
-	object_t yellowStand = item_stand_yellow;
+	Parser* parser = new Parser();
+	vector<string> fixedItems;
+	static int nbRowsFixedItems = 13;
 
-	Rectangle* mainRobotShape = new Rectangle(centre, robot, 10, 10, 0);
-	Circle* yellowStand1 = new Circle(centre, yellowStand, 5);
+	try {
+		parser->parseFile("fixed.csv", ';', &fixedItems);
+	} catch(exception& e) {
+		cout << e.what();
+	}
 
-	Mesh* rectangleMesh = new Mesh(mainRobotShape);
-	Mesh* circleMesh = new Mesh(yellowStand1);
+	//fixedItems format: 0 ID, 1 type, 2 franchissable?, 3 R, 4 V, 5 B, 6 centreX, 7 centreY, 8 rectangle?, 9 width, 10 height, 11 angle, 12 radius
+	for(int l=0; l<fixedItems.size()/nbRowsFixedItems; l++) {
+		point_t centre;
+		centre.x = stoi(fixedItems[6]);
+		centre.y = stoi(fixedItems[7]);
+		object_t type = map;//fixedItems[1];
+		//Shape shape;
 
-	//circleMesh->TerminalPrintMesh();
-
-	/*for(int i=0; i<=360; i+=1) {
-		mainRobotShape->SetAngle(i);
-		rectangleMesh->GenerateFromShape(mainRobotShape);
-		rectangleMesh->TerminalPrintMesh();
-		usleep(10000);
-		system("clear");
-	}*/
+		if(stoi(fixedItems[8])) {		//fixedItems[8] <=> rectangle ?
+			Rectangle shape = new Rectangle(centre,type,fixedItems[9],fixedItems[10],fixedItems[11]);
+		} else {
+			Circle shape = new Circle(centre,type,fixedItems[12]);
+		}
+		//Mesh mesh = new Mesh(shape, fixedItems[2]);
+	}
 	return 0;
 }
+
