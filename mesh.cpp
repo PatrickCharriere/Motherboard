@@ -212,14 +212,14 @@ Shape* Mesh::GetShape() {
 	return this->m_shape;
 }
 
-void Mesh::TerminalPrintMesh() {
+/*void Mesh::TerminalPrintMesh() {
 	for(int y=this->m_offset.y;y<=this->m_offset.y+this->m_height;y++) {
 		for(int x=this->m_offset.x;x<=this->m_offset.x+this->m_width;x++) {
 			cout<<" "<<this->m_data[(x-this->m_offset.x)+((y*this->m_width)-m_offset.y)]<<" ";
 		}
 		cout<<endl;
 	}
-}
+}*/
 
 int Mesh::Min(int a, int b, int c, int d) {
 	if(a<b) {

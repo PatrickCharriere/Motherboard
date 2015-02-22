@@ -21,6 +21,6 @@
 #include <unistd.h>
 using namespace std;
 
-
+object_t object(string str);
 
 #endif /* MAIN_H_ */

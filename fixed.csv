@@ -1,3 +1,6 @@
-map;map;1;0;0;255;1500;1000;1;2000;3000;0;0
-ASY1;area_starting_yellow;1;255;255;0;260;1000;1;380;400;90;0
+ID;object;franch;r;v;b;centreX;centreY;rect;width;height;angle;radius
+map;map;1;0;0;255;1500;1000;1;3000;2000;0;0
+ASY1;area_starting_yellow;1;255;255;0;260;1000;1;400;380;90;0
 ASY2;area_starting_yellow;1;255;255;0;450;1000;0;0;0;0;200
+CG1;area_cinema_green;1;0;255;0;200;589;1;400;378;0;0
+CG2;area_cinema_green;1;0;255;0;200;1411;1;400;378;0;0

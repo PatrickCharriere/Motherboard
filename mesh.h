@@ -33,7 +33,7 @@ public:
 	int Max(int a, int b, int c, int d);
 
 private:
-	int m_data[1000];
+	int m_data[6000000];
 	
 	point_t m_offset;
 	int m_width;
