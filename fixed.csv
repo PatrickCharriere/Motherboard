@@ -1,5 +1,5 @@
 ID;object;infranch;R;V;B;centreX;centreY;rect;width;height;angle;radius
-map;map;0;0;0;255;1500;1000;1;3000;2030;0;0
+map;map;0;0;0;255;1500;1015;1;3000;2030;0;0
 AStartYrect;area_starting_yellow;0;255;255;0;260;1000;1;400;380;90;0
 AStartYcircle;area_starting_yellow;0;255;255;0;450;1000;0;0;0;0;200
 ACineG1;area_cinema_green;0;0;255;0;200;589;1;400;378;0;0

@@ -6,34 +6,48 @@ int main(int argc, char* argv[]) {
 
 	Parser* parser = new Parser();
 	vector<string> fixedItems;
-	static int nbRowsFixedItems = 13;
+	vector<string> mobileItems;
+	static int nbRowsItems = 13;
 
 	try {
 		parser->parseFile("fixed.csv", ';', &fixedItems);
+		parser->parseFile("mobile.csv", ';', &mobileItems);
 	} catch(exception& e) {
 		cout << e.what();
 	}
 
 	//fixedItems format: 0 ID, 1 type, 2 franchissable?, 3 R, 4 V, 5 B, 6 centreX, 7 centreY, 8 rectangle?, 9 width, 10 height, 11 angle, 12 radius
 	//WARN: Line 0 of csv = title line so first line is l = 1 !
-	for(int l=1; l<(fixedItems.size()+1)/nbRowsFixedItems; l++) {
-		point_t centre;
+	//WARN: line 1 of csv fixed = map !!
 
-		cout<<fixedItems[nbRowsFixedItems*l+6]<<endl;
+	//Traitement à part de la map
+	point_t center;
+	center.x = stoi(fixedItems[nbRowsItems*1+6]);
+	center.y = stoi(fixedItems[nbRowsItems*1+7]);
+	object_t object_type = object(fixedItems[nbRowsItems*1+1]);
 
-		centre.x = stoi(fixedItems[nbRowsFixedItems*l+6]);
-		centre.y = stoi(fixedItems[nbRowsFixedItems*l+7]);
-		object_t object_type = object(fixedItems[nbRowsFixedItems*l+1]);
-		Shape* shape = new Shape(centre, object_type);
+	Rectangle* mapShape = new Rectangle(center,object_type,stoi(fixedItems[nbRowsItems*1+9]),stoi(fixedItems[nbRowsItems*1+10]),stoi(fixedItems[nbRowsItems*1+11]));
+	Mesh* mapMesh = new Mesh(mapShape, stoi(fixedItems[nbRowsItems*1+2]));
 
-		if(stoi(fixedItems[nbRowsFixedItems*l+8])) {		//fixedItems[8] <=> rectangle ?
-			Rectangle* shape = new Rectangle(centre,object_type,stoi(fixedItems[nbRowsFixedItems*l+9]),stoi(fixedItems[nbRowsFixedItems*l+10]),stoi(fixedItems[nbRowsFixedItems*l+11]));
-			Mesh* mesh = new Mesh(shape, stoi(fixedItems[nbRowsFixedItems*l+2]));
+	for(int l=2; l<(fixedItems.size()+1)/nbRowsItems; l++) {
+
+		center.x = stoi(fixedItems[nbRowsItems*l+6]);
+		center.y = stoi(fixedItems[nbRowsItems*l+7]);
+		object_t object_type = object(fixedItems[nbRowsItems*l+1]);
+		//Shape* shape = new Shape(center, object_type);
+		Mesh* mesh;
+
+		if(stoi(fixedItems[nbRowsItems*l+8])) {		//fixedItems[8] <=> rectangle ?
+			Rectangle* shape = new Rectangle(center,object_type,stoi(fixedItems[nbRowsItems*l+9]),stoi(fixedItems[nbRowsItems*l+10]),stoi(fixedItems[nbRowsItems*l+11]));
+			mesh = new Mesh(shape, stoi(fixedItems[nbRowsItems*l+2]));
 		} else {
-			Circle* shape = new Circle(centre,object_type,stoi(fixedItems[nbRowsFixedItems*l+12]));
-			Mesh* mesh = new Mesh(shape, stoi(fixedItems[nbRowsFixedItems*l+2]));
-
+			Circle* shape = new Circle(center,object_type,stoi(fixedItems[nbRowsItems*l+12]));
+			mesh = new Mesh(shape, stoi(fixedItems[nbRowsItems*l+2]));
 		}
+
+		mapMesh->Merge(mesh);
+		cout<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl;
+
 	}
 	return 0;
 }

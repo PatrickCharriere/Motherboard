@@ -26,15 +26,17 @@ public:
 	int GetWidth();
 	int GetHeight();
 	Shape* GetShape();
+	int* GetData();
 
 	void TerminalPrintMesh();
 
 	int Min(int a, int b, int c, int d);
 	int Max(int a, int b, int c, int d);
 
+	int m_data[7000000];
 private:
-	int m_data[6000000];
 	
+
 	point_t m_offset;
 	int m_width;
 	int m_height;

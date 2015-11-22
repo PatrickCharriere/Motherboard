@@ -69,7 +69,6 @@ void Mesh::GenerateFromShape(Shape *shape, int value) {
 		//angleRad from 0 to -2*PI radians
 		float angleRad = -angleDeg*M_PI/180;
 
-
 		int height = rectangle->GetHeight();
 		int width = rectangle->GetWidth();
 		float diagonaleSur2 = sqrt(height*height+width*width)/2;
@@ -134,13 +133,23 @@ void Mesh::GenerateFromShape(Shape *shape, int value) {
 
 		//Point qui va parcourir la mesh
 		point_t *pt = new point_t;
-		for(int y=E->y; y<=G->y; y++) {
-			for(int x=E->x; x<=G->x; x++) {
+		for(int y=E->y; y<G->y; y++) {
+			for(int x=E->x; x<G->x; x++) {
 				pt->x=x; pt->y=y;
 				if(IsPointInRect(pt,A,B,C,D,E,F,G,H,angleDeg)) {
 					this->m_data[(x-E->x)+((y*this->m_width)-E->y)] = value;
 				}
 			}
+		}
+	}
+}
+void Mesh::Merge(Mesh* mesh) {
+	//On part du principe que l'on merge la plus petite surface sur la map => this = map, mesh = objet à appliquer !!
+	int i, j;
+	for(i=0; i<mesh->GetWidth(); i++) {
+		for(j=0; j<mesh->GetHeight(); j++) {
+			cout<<mesh->m_data[i + mesh->GetWidth()*j];
+			this->m_data[mesh->GetOffset().x + this->GetWidth()*mesh->GetOffset().y] = this->m_data[mesh->GetOffset().x + this->GetWidth()*mesh->GetOffset().y] || mesh->m_data[i + mesh->GetWidth()*j];
 		}
 	}
 }
@@ -211,15 +220,18 @@ int Mesh::GetHeight() {
 Shape* Mesh::GetShape() {
 	return this->m_shape;
 }
+int* Mesh::GetData() {
+	return this->m_data;
+}
 
-/*void Mesh::TerminalPrintMesh() {
-	for(int y=this->m_offset.y;y<=this->m_offset.y+this->m_height;y++) {
-		for(int x=this->m_offset.x;x<=this->m_offset.x+this->m_width;x++) {
-			cout<<" "<<this->m_data[(x-this->m_offset.x)+((y*this->m_width)-m_offset.y)]<<" ";
+void Mesh::TerminalPrintMesh() {
+	for(int y=this->m_offset.y;y<this->m_offset.y+this->m_height;y++) {
+		for(int x=this->m_offset.x;x<this->m_offset.x+this->m_width;x++) {
+			cout<<this->m_data[(x-this->m_offset.x)+((y*this->m_width)-m_offset.y)];
 		}
 		cout<<endl;
 	}
-}*/
+}
 
 int Mesh::Min(int a, int b, int c, int d) {
 	if(a<b) {
